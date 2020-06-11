@@ -1,8 +1,14 @@
-var express = require('express');
-var app = express();
+require('dotenv').config()
 
-app.listen(3000,function(){
-    console.log('App is listening on 3000.')
+const express = require('express');
+const app = express();
+
+const sequelize = require('./db');
+sequelize.sync();
+app.use(express.json());
+
+app.listen(process.env.PORT,function(){
+    console.log(`App is listening on ${process.env.PORT}.`)
 })
 
 app.use('/api/test', function(req, res){
